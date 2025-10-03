@@ -13,7 +13,6 @@ body {
 }
 main {
   width: 100vw;
-  height: 100vh;
   background: url(../imgs/paris.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -140,9 +139,7 @@ nav a:hover {
   justify-content: center;
   align-items: center;
 
-  backdrop-filter: blur(17px);
   padding: 0 30px;
-  border-radius: 5px;
 }
 .sevilla {
   color: #d3adec;
@@ -516,4 +513,15 @@ footer {
 }
 .second-row a:active {
   border-color: #541eeb;
+}
+@media (max-width: 461px) {
+  .item {
+    width: 280px;
+  }
+  .right-side a {
+    width: 150px;
+  }
+  main {
+    height: 110vh;
+  }
 }
