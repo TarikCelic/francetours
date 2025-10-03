@@ -1,13 +1,14 @@
 const cities = {
-  Paris: "imgs/paris.jpg",
-  Lyon: "imgs/lyon.jpg",
-  Marseille: "imgs/marsej.jpg",
-  Lille: "imgs/lile.webp",
-  Toulouse: "imgs/tuluz.jpg",
-  Nice: "imgs/nica.jpg",
-  Nantes: "imgs/nantes.jpg",
-  Bordeaux: "imgs/bordo.jpg",
+  Paris: "/francetours/imgs/paris.jpg",
+  Lyon: "/francetours/imgs/lyon.jpg",
+  Marseille: "/francetours/imgs/marsej.jpg",
+  Lille: "/francetours/imgs/lile.webp",
+  Toulouse: "/francetours/imgs/tuluz.jpg",
+  Nice: "/francetours/imgs/nica.jpg",
+  Nantes: "/francetours/imgs/nantes.jpg",
+  Bordeaux: "/francetours/imgs/bordo.jpg",
 };
+
 
 const h2 = document.querySelector("h2.sevillla");
 const links = document.querySelectorAll(".right-side a");
