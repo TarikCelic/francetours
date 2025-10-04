@@ -98,7 +98,7 @@ function createOptimizedImage(cityName, imagePath, isFirst = false) {
 
   // Responsive dimenzije umesto fiksiranih
   img.style.width = "100%";
-  img.style.height = "100vh";
+  img.style.height = "100%";
   img.style.objectFit = "cover";
   img.style.objectPosition = "center";
 
