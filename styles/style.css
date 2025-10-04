@@ -125,6 +125,14 @@ nav {
     text-align: center;
   }
 }
+@keyframes changeBg {
+  0% {
+    background: url("../imgs/aboutus.jpg");
+  }
+  100% {
+    background: #0d0d0d;
+  }
+}
 .contact-us:hover,
 .nav:hover {
   border: 2px solid rgba(255, 255, 255, 0.63);
@@ -332,6 +340,7 @@ a.selected:hover {
   border-radius: 15px;
   border: 1px solid #ffffff3b;
   border-top: 0;
+  position: relative;
 }
 .place-info {
   width: 100%;
@@ -446,6 +455,27 @@ a.selected:hover {
     margin-bottom: -1.9rem;
     margin-right: 10px;
   }
+  .naslov-about-special {
+    justify-content: center;
+    align-items: center;
+  }
+  .naslov-about-special h1 {
+    font-size: 2em;
+  }
+  .naslov-about-special img {
+    width: 45px;
+    margin-right: -5px;
+  }
+}
+@media (max-width: 350px) {
+  .section-name-desc p {
+    font-size: 0.9rem;
+  }
+}
+.naslov-about-special {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .burger-screen {
   z-index: 1001;
@@ -461,12 +491,6 @@ a.selected:hover {
   align-items: center;
   flex-direction: column;
   display: none;
-}
-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 0;
 }
 .burger-screen h2 {
   color: white;
@@ -522,6 +546,179 @@ footer {
     width: 150px;
   }
   main {
-    height: 110vh;
+    height: 130vh;
   }
+}
+@media (max-width: 555px) {
+  .places {
+    padding: 0 30px;
+  }
+  .first-row-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .place {
+    flex-grow: 1;
+  }
+  .place-img {
+    width: 100%;
+  }
+  .img-de-place {
+    flex-grow: 1;
+    border-radius: 0 0 0 0;
+  }
+  .book-a-place {
+    width: 90%;
+  }
+}
+.img-de-place {
+  display: flex;
+  width: 100%;
+  height: 180px;
+  border-radius: 15px 15px 0 0;
+}
+.best-this-month {
+  border: 1px solid orange;
+}
+.bestseller {
+  width: 80px;
+  height: 20px;
+  font-weight: 300;
+  color: #0d0d0d;
+  background-color: orange;
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  left: 0px;
+  padding-top: 3px;
+  border-radius: 10px 0 10px 0;
+}
+
+#about-us {
+  background-color: #e6e2e2;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 50px;
+  padding: 50px 20px;
+}
+.about-us-special p {
+  width: 300px;
+  text-align: center;
+}
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #0d0f18;
+  color: #e6e2e2;
+  padding: 20px 60px;
+  text-align: center;
+}
+.specialfrance {
+  color: #663cd8;
+}
+@media (min-width: 1040px) {
+  #about-us {
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 100px 20px;
+  }
+  .about-us-special p,
+  .about-us-special h2 {
+    text-align: left;
+  }
+  .special-naslov {
+    font-size: 4rem;
+  }
+}
+@media (max-height: 700px) {
+  main {
+    height: 130vh;
+  }
+}
+@media (max-width: 1077px) and (min-width: 800px) {
+  .places {
+    width: 790px;
+  }
+}
+footer h1 {
+  font-size: 1.2rem;
+}
+.img-footer {
+  width: 100%;
+  height: 100%;
+}
+
+.link-footer {
+  border: 1px solid #fff;
+  padding: 0;
+  width: 35px;
+  height: 35px;
+  padding: 8px;
+  border-radius: 100px;
+}
+.links-footer {
+  display: flex;
+  gap: 8px;
+}
+.first-row-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.second-row-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.list p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  width: 30px;
+  border-bottom: 3px #fff solid;
+}
+.list a {
+  display: block;
+  border: none;
+  text-transform: none;
+  font-weight: 300;
+  text-align: left;
+  width: 100%;
+  padding: 0;
+  color: white;
+  text-decoration: none;
+}
+.list {
+  min-width: 250px;
+  text-align: left;
+  margin: 20px 0;
+}
+.list li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 1140px) {
+  footer {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .second-row-footer {
+    justify-content: flex-start;
+  }
+}
+p.copyright {
+  margin-top: 30px;
+  display: block;
+  width: 100%;
+  font-weight: 300;
+  text-align: left;
 }

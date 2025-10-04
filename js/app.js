@@ -67,11 +67,3 @@ modalItem.forEach((element) => {
     burgerScreen.style.display = "none";
   });
 });
-
-const preloadedImages = [];
-
-cities.forEach((src) => {
-  const img = new Image();
-  img.src = src;
-  preloadedImages.push(img);
-});
