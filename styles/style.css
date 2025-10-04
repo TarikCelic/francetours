@@ -559,12 +559,6 @@ a.selected:hover {
   .right-side a {
     width: 150px;
   }
-  main {
-    height: 130vh;
-  }
-  .changephoto {
-    height: 130vh;
-  }
 }
 @media (max-width: 555px) {
   .places {
@@ -652,14 +646,6 @@ footer {
   }
   .special-naslov {
     font-size: 4rem;
-  }
-}
-@media (max-height: 700px) {
-  main {
-    height: 130vh;
-  }
-  .changephoto {
-    height: 130vh;
   }
 }
 .loc-about {

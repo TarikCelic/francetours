@@ -78,15 +78,148 @@ const burgerScreen = document.querySelector(".burger-screen");
 const photoChange = document.querySelector(".photo-change");
 const buyTicketsBtn = document.querySelector(".buy-tickets");
 
-// Dinamičko učitavanje slika
+// OPTIMIZOVANO: Cache za slike sa dodatnim informacijama
+const loadedImages = new Map();
 let currentMap = null;
+let isLoading = false;
+
+// OPTIMIZOVANO: Funkcija za kreiranje optimizovane slike
+function createOptimizedImage(cityName, imagePath, isFirst = false) {
+  const img = document.createElement("img");
+  img.className = `changephoto${isFirst ? " current" : ""}`;
+  img.alt = `${cityName} cityscape`;
+
+  // KLJUČNE OPTIMIZACIJE:
+  // 1. Uklonjena fiksirana visina od 1080px
+  // 2. Dodani width i height atributi za sprečavanje layout shift
+  // 3. Eager loading za prvu sliku, lazy za ostale
+  img.loading = isFirst ? "eager" : "lazy";
+  img.decoding = "async";
+
+  // Responsive dimenzije umesto fiksiranih
+  img.style.width = "100%";
+  img.style.height = "100vh";
+  img.style.objectFit = "cover";
+  img.style.objectPosition = "center";
+
+  // Dodavanje width/height atributa za bolje performanse
+  img.width = 1920; // maksimalna širina
+  img.height = 1080; // maksimalna visina
+
+  // Optimizovano učitavanje
+  img.onload = function () {
+    isLoading = false;
+    // Uklanjamo placeholder ili loading stanje
+    img.style.opacity = "1";
+  };
+
+  img.onerror = function () {
+    console.error(`Failed to load image: ${imagePath}`);
+    isLoading = false;
+    // Fallback ili retry logika
+  };
+
+  // Početna opacity za smooth transition
+  img.style.opacity = "0";
+  img.style.transition = "opacity 0.3s ease";
+
+  img.src = imagePath;
+  return img;
+}
+
+// OPTIMIZOVANO: Preload prva slika (Paris) odmah
+function preloadFirstImage() {
+  const parisLink = Array.from(links).find(
+    (link) => link.textContent.trim() === "Paris"
+  );
+
+  if (parisLink) {
+    const imagePath = parisLink.getAttribute("data-img");
+    if (imagePath) {
+      const img = createOptimizedImage("Paris", imagePath, true);
+      photoChange.appendChild(img);
+      loadedImages.set("Paris", img);
+
+      // Postavi Paris kao selektovan
+      parisLink.classList.add("selected");
+
+      // Update tekst za Paris
+      const paris = sities.find((city) => city.name === "Paris");
+      if (paris) {
+        h2.textContent = paris.name;
+        desc.textContent = paris.description;
+        h2.style.color = "#fff";
+        h2.style.textAlign = "left";
+        h2.style.padding = "5px 20px";
+        leftside.style.backdropFilter = "blur(2px)";
+      }
+    }
+  }
+}
+
+// OPTIMIZOVANO: Debounced funkcija za sprečavanje brze promene slika
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// OPTIMIZOVANO: Glavna funkcija za promenu grada
+const changeCity = debounce(function (link, cityName, imagePath) {
+  if (isLoading) return; // Sprečava preklapanje zahteva
+
+  isLoading = true;
+
+  // Update selected link
+  links.forEach((el) => el.classList.remove("selected"));
+  link.classList.add("selected");
+
+  // Sakrij sve ostale slike
+  loadedImages.forEach((img, name) => {
+    if (name !== cityName) {
+      img.classList.remove("current");
+      img.style.opacity = "0";
+    }
+  });
+
+  // Ako slika već postoji, samo je prikaži
+  if (loadedImages.has(cityName)) {
+    const existingImg = loadedImages.get(cityName);
+    existingImg.classList.add("current");
+    existingImg.style.opacity = "1";
+    isLoading = false;
+  } else if (imagePath) {
+    // Kreiraj novu sliku
+    const img = createOptimizedImage(cityName, imagePath, false);
+    photoChange.appendChild(img);
+    loadedImages.set(cityName, img);
+    img.classList.add("current");
+  }
+
+  // Update tekst
+  const grad = sities.find((city) => city.name === cityName);
+  if (grad) {
+    h2.textContent = grad.name;
+    desc.textContent = grad.description;
+    h2.style.color = "#fff";
+    h2.style.textAlign = "left";
+    h2.style.padding = "5px 20px";
+    leftside.style.backdropFilter = "blur(2px)";
+  }
+}, 150); // 150ms debounce
 
 // Buy Tickets button
 buyTicketsBtn.addEventListener("click", () => {
-  window.location.href = "tickets.html"; // Promijeni putanju gdje želiš
+  window.location.href = "tickets.html";
 });
 
-// Location items i mape
+// Location items i mape (OSTAJE ISTO)
 locationItem.forEach((e) => {
   e.addEventListener("click", () => {
     const street = e.querySelector("p.street-item").textContent.trim();
@@ -105,10 +238,7 @@ locationItem.forEach((e) => {
   });
 });
 
-// Promjena gradova
-// Dinamičko učitavanje slika (optimizirano)
-const loadedImages = new Map(); // mapa umjesto seta, čuvamo DOM element
-
+// OPTIMIZOVANO: Event listeners za linkove
 links.forEach((link) => {
   link.addEventListener("click", (event) => {
     event.preventDefault();
@@ -116,49 +246,13 @@ links.forEach((link) => {
     const cityName = link.textContent.trim();
     const imagePath = link.getAttribute("data-img");
 
-    // Update selected link
-    links.forEach((el) => el.classList.remove("selected"));
-    link.classList.add("selected");
-
-    // Sakrij sve ostale slike osim trenutne
-    loadedImages.forEach((img, name) => {
-      if (name !== cityName) {
-        img.classList.remove("current");
-      }
-    });
-
-    // Ako slika već postoji, samo je prikaži
-    if (loadedImages.has(cityName)) {
-      loadedImages.get(cityName).classList.add("current");
-    } else if (imagePath) {
-      const img = document.createElement("img");
-      img.className = `changephoto current`;
-      img.alt = `${cityName} cityscape`;
-      img.loading = "lazy"; // lazy load!
-      img.style.width = "100%"; // skaliranje preko CSS-a
-      img.style.height = "1080";
-      img.style.objectFit = "cover";
-
-      img.src = imagePath;
-
-      photoChange.appendChild(img);
-      loadedImages.set(cityName, img);
-    }
-
-    // Update tekst
-    const grad = sities.find((city) => city.name === cityName);
-    if (grad) {
-      h2.textContent = grad.name;
-      desc.textContent = grad.description;
-      h2.style.color = "#fff";
-      h2.style.textAlign = "left";
-      h2.style.padding = "5px 20px";
-      leftside.style.backdropFilter = "blur(2px)";
+    if (imagePath) {
+      changeCity(link, cityName, imagePath);
     }
   });
 });
 
-// Scroll effect za nav
+// Scroll effect za nav (OSTAJE ISTO)
 window.addEventListener("scroll", () => {
   const mainHeight = main.offsetHeight;
   const scrollPosition = window.scrollY || window.pageYOffset;
@@ -171,7 +265,7 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// Burger menu
+// Burger menu (OSTAJE ISTO)
 burger.addEventListener("click", () => {
   body.style.overflow = "hidden";
   burgerScreen.style.display = "flex";
@@ -188,3 +282,23 @@ modalItem.forEach((element) => {
     burgerScreen.style.display = "none";
   });
 });
+
+// OPTIMIZOVANO: Inicijalizacija kada je DOM spreman
+document.addEventListener("DOMContentLoaded", function () {
+  // Preload prve slike za bolju UX
+  preloadFirstImage();
+});
+
+// OPTIMIZOVANO: Cleanup funkcija za memoriju (ako je potrebna)
+function cleanup() {
+  loadedImages.forEach((img, name) => {
+    if (!img.classList.contains("current")) {
+      // Możda ukloni nekorišćene slike iz DOM-a posle nekog vremena
+      // img.remove();
+      // loadedImages.delete(name);
+    }
+  });
+}
+
+// OPCIONO: Pokreni cleanup periodično (samo ako imaš previše slika)
+// setInterval(cleanup, 300000); // 5 minuta
