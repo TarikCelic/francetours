@@ -136,7 +136,7 @@ links.forEach((link) => {
       img.alt = `${cityName} cityscape`;
       img.loading = "lazy"; // lazy load!
       img.style.width = "100%"; // skaliranje preko CSS-a
-      img.style.height = "auto";
+      img.style.height = "1080";
       img.style.objectFit = "cover";
 
       img.src = imagePath;
