@@ -7,7 +7,6 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Dodaj font-display za brže učitavanje -->
     <link
       href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700&family=Montserrat:ital,wght@0,100..900&display=swap"
       rel="stylesheet"
@@ -26,7 +25,7 @@
     <div class="burger-screen">
       <div class="first-row">
         <h2>Navigation</h2>
-        <img src="imgs/X.svg" alt="" />
+        <img src="imgs/X.svg" alt="Close menu" width="40" height="40" />
       </div>
       <div class="second-row">
         <ul>
@@ -42,18 +41,23 @@
     </div>
     <main id="main">
       <div class="photo-change">
-        <img src="imgs/paris.webp" class="changephoto Paris current" />
-        <img src="imgs/lyon.webp" class="changephoto Lyon" />
-        <img src="imgs/marsej.webp" class="changephoto Marseille" />
-        <img src="imgs/lile.webp" class="changephoto Lille" />
-        <img src="imgs/tuluz.webp" class="changephoto Toulouse" />
-        <img src="imgs/nice.webp" class="changephoto Nice" />
-        <img src="imgs/nantes.webp" class="changephoto Nantes" />
-        <img src="imgs/bordo.webp" class="changephoto Bordeaux" />
+        <!-- Samo jedna slika se učitava odmah, ostale dinamički kroz JS -->
+        <img
+          src="imgs/paris.webp"
+          class="changephoto Paris current"
+          alt="Paris cityscape"
+          width="1920"
+          height="1080"
+        />
       </div>
       <nav>
         <div class="naslov">
-          <img src="imgs/paris icon.svg" alt="" width="50px" />
+          <img
+            src="imgs/paris icon.svg"
+            alt="Paris icon"
+            width="50"
+            height="50"
+          />
           <h1><span class="sevilla">France</span>tours</h1>
         </div>
         <div class="nav">
@@ -69,7 +73,7 @@
           <button class="contact-us">Contact Us</button>
         </div>
         <div class="burger">
-          <img src="imgs/burger.svg" width="30px" />
+          <img src="imgs/burger.svg" alt="Menu" width="30" height="30" />
         </div>
       </nav>
       <article>
@@ -83,14 +87,26 @@
           <button class="buy-tickets">Buy tickets now!</button>
         </div>
         <div class="right-side">
-          <a class="selected" href="#">Paris</a>
-          <a href="#">Lyon</a>
-          <a href="#">Marseille</a>
-          <a href="#">Lille</a>
-          <a href="#">Toulouse</a>
-          <a href="#">Nice</a>
-          <a href="#">Nantes</a>
-          <a href="#">Bordeaux</a>
+          <a
+            class="selected"
+            href="#"
+            data-city="Paris"
+            data-img="imgs/paris.webp"
+            >Paris</a
+          >
+          <a href="#" data-city="Lyon" data-img="imgs/lyon.webp">Lyon</a>
+          <a href="#" data-city="Marseille" data-img="imgs/marsej.webp"
+            >Marseille</a
+          >
+          <a href="#" data-city="Lille" data-img="imgs/lile.webp">Lille</a>
+          <a href="#" data-city="Toulouse" data-img="imgs/tuluz.webp"
+            >Toulouse</a
+          >
+          <a href="#" data-city="Nice" data-img="imgs/nice.webp">Nice</a>
+          <a href="#" data-city="Nantes" data-img="imgs/nantes.webp">Nantes</a>
+          <a href="#" data-city="Bordeaux" data-img="imgs/bordo.webp"
+            >Bordeaux</a
+          >
         </div>
       </article>
     </main>
@@ -105,7 +121,13 @@
           <div class="item">
             <div class="item-left-side">
               <div class="location">
-                <img src="imgs/location.svg" width="35px" />
+                <img
+                  src="imgs/location.svg"
+                  alt="Location icon"
+                  width="35"
+                  height="35"
+                  loading="lazy"
+                />
               </div>
               <div class="info">
                 <p class="city-item">Paris</p>
@@ -120,7 +142,13 @@
           <div class="item">
             <div class="item-left-side">
               <div class="location">
-                <img src="imgs/location.svg" width="35px" />
+                <img
+                  src="imgs/location.svg"
+                  alt="Location icon"
+                  width="35"
+                  height="35"
+                  loading="lazy"
+                />
               </div>
               <div class="info">
                 <p class="city-item">Paris</p>
@@ -135,7 +163,13 @@
           <div class="item">
             <div class="item-left-side">
               <div class="location">
-                <img src="imgs/location.svg" width="35px" />
+                <img
+                  src="imgs/location.svg"
+                  alt="Location icon"
+                  width="35"
+                  height="35"
+                  loading="lazy"
+                />
               </div>
               <div class="info">
                 <p class="city-item">Lyon</p>
@@ -150,7 +184,13 @@
           <div class="item">
             <div class="item-left-side">
               <div class="location">
-                <img src="imgs/location.svg" width="35px" />
+                <img
+                  src="imgs/location.svg"
+                  alt="Location icon"
+                  width="35"
+                  height="35"
+                  loading="lazy"
+                />
               </div>
               <div class="info">
                 <p class="city-item">Marseille</p>
@@ -184,11 +224,13 @@
         <div class="place">
           <div class="place-img">
             <img
-            loading="lazy"
+              loading="lazy"
+              decoding="async"
               src="https://secure.s.forbestravelguide.com/img/properties/cheval-blanc-paris/cheval-blanc-paris-exterior.jpg"
-              alt=""
-              width="100%"
-              height="180px"
+              alt="Cheval Blanc hotel exterior"
+              width="260"
+              height="180"
+              class="img-de-place"
               style="border-radius: 15px 15px 0 0"
             />
           </div>
@@ -200,7 +242,13 @@
                 <p>Fantastic(7346)</p>
               </div>
               <div class="city">
-                <img src="imgs/location-white.svg" width="20px" />
+                <img
+                  src="imgs/location-white.svg"
+                  alt="Location"
+                  width="20"
+                  height="20"
+                  loading="lazy"
+                />
                 <p>Paris</p>
               </div>
             </div>
@@ -212,16 +260,34 @@
               <div class="specs">
                 <div class="spec">
                   <p>Breakfast included</p>
-                  <img src="imgs/correct.svg" width="15px" alt="" />
+                  <img
+                    src="imgs/correct.svg"
+                    width="15"
+                    height="15"
+                    alt="Included"
+                    loading="lazy"
+                  />
                 </div>
                 <div class="spec">
                   <p>Room Service</p>
-                  <img src="imgs/correct.svg" width="15px" alt="" />
+                  <img
+                    src="imgs/correct.svg"
+                    width="15"
+                    height="15"
+                    alt="Included"
+                    loading="lazy"
+                  />
                 </div>
 
                 <div class="spec">
                   <p>Swimming pool</p>
-                  <img src="imgs/correct.svg" width="15px" alt="" />
+                  <img
+                    src="imgs/correct.svg"
+                    width="15"
+                    height="15"
+                    alt="Included"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>
@@ -233,10 +299,13 @@
           <div class="bestseller">Featured</div>
           <div class="place-img">
             <img
-            loading="lazy"
+              loading="lazy"
+              decoding="async"
               src="https://secure.s.forbestravelguide.com/img/properties/hotel-plaza-athenee-paris/hotel-plaza-athenee-paris-exterior-new.jpg"
-              width="100%"
-              height="180px"
+              alt="Hotel Plaza Athenee exterior"
+              width="260"
+              height="180"
+              class="img-de-place"
               style="border-radius: 15px 15px 0 0"
             />
           </div>
@@ -248,7 +317,13 @@
                 <p>Fantastic(4346)</p>
               </div>
               <div class="city">
-                <img src="imgs/location-white.svg" width="20px" />
+                <img
+                  src="imgs/location-white.svg"
+                  alt="Location"
+                  width="20"
+                  height="20"
+                  loading="lazy"
+                />
                 <p>Lyon</p>
               </div>
             </div>
@@ -260,11 +335,23 @@
               <div class="specs">
                 <div class="spec">
                   <p>Breakfast included</p>
-                  <img src="imgs/correct.svg" width="15px" alt="" />
+                  <img
+                    src="imgs/correct.svg"
+                    width="15"
+                    height="15"
+                    alt="Included"
+                    loading="lazy"
+                  />
                 </div>
                 <div class="spec">
                   <p>Room Service</p>
-                  <img src="imgs/correct.svg" width="15px" alt="" />
+                  <img
+                    src="imgs/correct.svg"
+                    width="15"
+                    height="15"
+                    alt="Included"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>
@@ -275,11 +362,13 @@
         <div class="place">
           <div class="place-img">
             <img
-            loading="lazy"
+              loading="lazy"
+              decoding="async"
               src="https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg"
-              alt=""
-              width="100%"
-              height="180px"
+              alt="Mercure St. Julian's exterior"
+              width="260"
+              height="180"
+              class="img-de-place"
               style="border-radius: 15px 15px 0 0"
             />
           </div>
@@ -291,7 +380,13 @@
                 <p>Fantastic(3346)</p>
               </div>
               <div class="city">
-                <img src="imgs/location-white.svg" width="20px" />
+                <img
+                  src="imgs/location-white.svg"
+                  alt="Location"
+                  width="20"
+                  height="20"
+                  loading="lazy"
+                />
                 <p>Marseille</p>
               </div>
             </div>
@@ -303,11 +398,23 @@
               <div class="specs">
                 <div class="spec">
                   <p>Breakfast included</p>
-                  <img src="imgs/correct.svg" width="15px" alt="" />
+                  <img
+                    src="imgs/correct.svg"
+                    width="15"
+                    height="15"
+                    alt="Included"
+                    loading="lazy"
+                  />
                 </div>
                 <div class="spec">
                   <p>Swimming pool</p>
-                  <img src="imgs/correct.svg" width="15px" alt="" />
+                  <img
+                    src="imgs/correct.svg"
+                    width="15"
+                    height="15"
+                    alt="Included"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>
@@ -318,9 +425,12 @@
         <div class="place">
           <div class="place-img">
             <img
-            loading="lazy"
+              loading="lazy"
+              decoding="async"
               src="https://secure.s.forbestravelguide.com/img/properties/hotel-le-fouquets-paris/hotel-barriere-fouquets-paris-exterior-new.jpg"
-              alt=""
+              alt="Barrière Le Fouquet's exterior"
+              width="260"
+              height="180"
               class="img-de-place"
             />
           </div>
@@ -332,7 +442,13 @@
                 <p>Great(3016)</p>
               </div>
               <div class="city">
-                <img src="imgs/location-white.svg" width="20px" />
+                <img
+                  src="imgs/location-white.svg"
+                  alt="Location"
+                  width="20"
+                  height="20"
+                  loading="lazy"
+                />
                 <p>Lille</p>
               </div>
             </div>
@@ -344,7 +460,13 @@
               <div class="specs">
                 <div class="spec">
                   <p>Breakfast included</p>
-                  <img src="imgs/correct.svg" width="15px" alt="" />
+                  <img
+                    src="imgs/correct.svg"
+                    width="15"
+                    height="15"
+                    alt="Included"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>
@@ -357,7 +479,13 @@
 
     <section id="about-us">
       <div class="naslov-about-special">
-        <img src="imgs/blackparis.svg" width="75px" />
+        <img
+          src="imgs/blackparis.svg"
+          alt="Paris icon"
+          width="75"
+          height="75"
+          loading="lazy"
+        />
         <h1 style="color: #0d0d0d" class="special-naslov">
           <span class="specialfrance">France</span>tours
         </h1>
@@ -368,8 +496,8 @@
           Founded in 2010, <strong>Francetours</strong> grew from a small local
           agency into a trusted name for exploring France. With a deep passion
           for French culture and travel, we focus on creating seamless journeys
-          across the country — from Paris to Provence, from famous landmarks to
-          hidden treasures — always dedicated to offering authentic experiences
+          across the country – from Paris to Provence, from famous landmarks to
+          hidden treasures – always dedicated to offering authentic experiences
           that capture the true spirit of France.
         </p>
       </div>
@@ -381,27 +509,58 @@
         <div class="links-footer">
           <a
             target="_blank"
+            rel="noopener noreferrer"
             href="https://www.facebook.com/tarik.celic.2025"
             class="link-footer"
           >
-            <img src="imgs/facebook.svg" class="img-footer" />
+            <img
+              src="imgs/facebook.svg"
+              alt="Facebook"
+              class="img-footer"
+              width="35"
+              height="35"
+              loading="lazy"
+            />
           </a>
           <a
             target="_blank"
+            rel="noopener noreferrer"
             href="https://www.linkedin.com/in/tarik-%C4%8Deli%C4%87-303b92363/"
             class="link-footer"
           >
-            <img src="imgs/in.svg" class="img-footer" />
+            <img
+              src="imgs/in.svg"
+              alt="LinkedIn"
+              class="img-footer"
+              width="35"
+              height="35"
+              loading="lazy"
+            />
           </a>
           <a
             target="_blank"
+            rel="noopener noreferrer"
             href="https://www.instagram.com/tarikcelicc/"
             class="link-footer"
           >
-            <img src="imgs/insta.svg" class="img-footer" />
+            <img
+              src="imgs/insta.svg"
+              alt="Instagram"
+              class="img-footer"
+              width="35"
+              height="35"
+              loading="lazy"
+            />
           </a>
           <div class="link-footer">
-            <img src="imgs/yt.svg" class="img-footer" />
+            <img
+              src="imgs/yt.svg"
+              alt="YouTube"
+              class="img-footer"
+              width="35"
+              height="35"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>

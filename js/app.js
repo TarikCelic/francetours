@@ -26,7 +26,7 @@ const sities = [
   {
     name: "Lyon",
     description:
-      "France’s culinary heart, blending rich history, art, and modern life. Perfect for food lovers and culture seekers alike.",
+      "France's culinary heart, blending rich history, art, and modern life. Perfect for food lovers and culture seekers alike.",
   },
   {
     name: "Marseille",
@@ -41,7 +41,7 @@ const sities = [
   {
     name: "Toulouse",
     description:
-      "The ‘Pink City’ glows with sunny charm and creativity. Famous for its brick architecture, aerospace heritage, and relaxed lifestyle.",
+      "The 'Pink City' glows with sunny charm and creativity. Famous for its brick architecture, aerospace heritage, and relaxed lifestyle.",
   },
   {
     name: "Nice",
@@ -70,13 +70,16 @@ const burger = document.querySelector(".burger");
 const body = document.querySelector("html");
 const closeModal = document.querySelector(".first-row img");
 const modalItem = document.querySelectorAll(".second-row ul li a");
-const pictures = document.querySelectorAll(".changephoto");
 
 const mapIframe = document.querySelector(".mapframe iframe");
 const frame = document.querySelector(".mapframe");
 const locationItem = document.querySelectorAll(".item");
 
 const burgerScreen = document.querySelector(".burger-screen");
+
+// OPTIMIZACIJA: Dinamičko učitavanje slika
+const photoChange = document.querySelector(".photo-change");
+const loadedImages = new Set(["Paris"]); // Paris je već učitan na startu
 
 let currentMap = null;
 
@@ -87,29 +90,60 @@ locationItem.forEach((e) => {
 
     // toggle logika
     if (currentMap === mapData.name) {
-      frame.style.display = "none"; // sakrij iframe
+      frame.style.display = "none";
       currentMap = null;
-      console.log("skriveno");
     } else {
-      mapIframe.src = mapData.src; // postavi novu mapu
-      frame.style.display = "flex"; // pokaži iframe
+      mapIframe.src = mapData.src;
+      frame.style.display = "flex";
       currentMap = mapData.name;
     }
 
     // glatki scroll do elementa
     e.scrollIntoView({ behavior: "smooth", block: "start" });
-
-    console.log("Current map:", currentMap);
-    console.log("Clicked street:", street);
   });
 });
+
 links.forEach((link) => {
-  link.addEventListener("click", () => {
-    const cityName = link.textContent;
+  link.addEventListener("click", (event) => {
+    event.preventDefault(); // Spriječi default ponašanje
+
+    const cityName = link.textContent.trim();
+    const imagePath = link.getAttribute("data-img");
 
     // Ukloni "selected" sa svih linkova i dodaj na kliknuti
     links.forEach((el) => el.classList.remove("selected"));
     link.classList.add("selected");
+
+    // OPTIMIZACIJA: Učitaj sliku samo ako već nije učitana
+    if (!loadedImages.has(cityName) && imagePath) {
+      const img = document.createElement("img");
+      img.src = imagePath;
+      img.className = `changephoto ${cityName}`;
+      img.alt = `${cityName} cityscape`;
+      img.width = 1920;
+      img.height = 1080;
+
+      // Dodaj event listener da čeka dok se slika učita
+      img.addEventListener("load", () => {
+        // Ukloni .current sa svih slika
+        const allImages = photoChange.querySelectorAll(".changephoto");
+        allImages.forEach((el) => el.classList.remove("current"));
+        // Dodaj .current na novu sliku
+        img.classList.add("current");
+      });
+
+      photoChange.appendChild(img);
+      loadedImages.add(cityName);
+    } else {
+      // Slika već postoji, samo je prikaži
+      const allImages = photoChange.querySelectorAll(".changephoto");
+      allImages.forEach((element) => {
+        element.classList.remove("current");
+        if (element.classList.contains(cityName)) {
+          element.classList.add("current");
+        }
+      });
+    }
 
     // Pronađi grad u nizu sities
     const grad = sities.find((city) => city.name === cityName);
@@ -122,14 +156,6 @@ links.forEach((link) => {
       h2.style.textAlign = "left";
       h2.style.padding = "5px 20px";
       leftside.style.backdropFilter = "blur(2px)";
-
-      // Promijeni sliku (dodaj .current samo na odgovarajuću)
-      pictures.forEach((element) => {
-        element.classList.remove("current");
-        if (element.classList.contains(grad.name)) {
-          element.classList.add("current");
-        }
-      });
 
       // (Ako želiš i opis grada)
       const p = document.querySelector(".city-description");
@@ -153,6 +179,7 @@ burger.addEventListener("click", () => {
   body.style.overflow = "hidden";
   burgerScreen.style.display = "flex";
 });
+
 closeModal.addEventListener("click", () => {
   body.style.overflow = "auto";
   burgerScreen.style.display = "none";
