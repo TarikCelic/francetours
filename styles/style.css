@@ -13,18 +13,21 @@ body {
 }
 main {
   width: 100vw;
-  background: url(../imgs/lile.jpg);
-  background: url(../imgs/lyon.jpg);
-  background: url(../imgs/marsej.jpg);
-  background: url(../imgs/tuluz.jpg);
-  background: url(../imgs/nica.jpg);
-  background: url(../imgs/nantes.jpg);
-  background: url(../imgs/bordo.jpg);
-  background: url(../imgs/paris.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top center;
   color: white;
+}
+.changephoto {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.current {
+  opacity: 1;
 }
 nav li {
   list-style: none;
@@ -125,12 +128,23 @@ nav {
   .nav {
     display: none;
   }
+  .loc-about,
   #locations {
     flex-direction: column;
+    gap: 50px;
   }
   .loc-lside h3 {
     text-align: center;
   }
+}
+.mapframe {
+  display: none;
+  width: 100%;
+  padding: 10px;
+  box-shadow: 0px 0px 30px rgba(255, 228, 237, 0.37);
+}
+iframe {
+  width: 100%;
 }
 @keyframes changeBg {
   0% {
@@ -193,13 +207,14 @@ h2 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  max-width: 1000px;
+  max-width: 100%;
   font-size: 1.1rem;
   padding: 50px;
   border-radius: 0 30px 0 30px;
   opacity: 0;
   animation: leftAnim 2s ease forwards;
   margin: auto auto;
+  z-index: 1;
 }
 .left-side p {
   text-align: center;
@@ -231,6 +246,7 @@ h2 {
   align-items: center;
   gap: 10px;
 
+  z-index: 1;
   flex-wrap: wrap;
 
   transform: translateY(1700px);
@@ -555,10 +571,17 @@ a.selected:hover {
   main {
     height: 130vh;
   }
+  .changephoto {
+    height: 130vh;
+  }
 }
 @media (max-width: 555px) {
   .places {
     padding: 0 30px;
+  }
+
+  .first-row-footer h1 {
+    font-size: 1.05rem;
   }
   .first-row-footer {
     flex-direction: column;
@@ -646,6 +669,15 @@ footer {
   main {
     height: 130vh;
   }
+  .changephoto {
+    height: 130vh;
+  }
+}
+.loc-about {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  align-items: center;
 }
 @media (max-width: 1077px) and (min-width: 800px) {
   .places {
@@ -659,7 +691,6 @@ footer h1 {
   width: 100%;
   height: 100%;
 }
-
 .link-footer {
   border: 1px solid #fff;
   padding: 0;
@@ -667,6 +698,7 @@ footer h1 {
   height: 35px;
   padding: 8px;
   border-radius: 100px;
+  transition: all 0.2s ease-in;
 }
 .links-footer {
   display: flex;
@@ -701,7 +733,11 @@ footer h1 {
   width: 100%;
   padding: 0;
   color: white;
-  text-decoration: none;
+  text-decoration: underline transparent;
+  transition: all 0.2s ease-in-out;
+}
+.list a:hover {
+  text-decoration: underline #fff;
 }
 .list {
   min-width: 250px;
@@ -728,4 +764,16 @@ p.copyright {
   width: 100%;
   font-weight: 300;
   text-align: left;
+}
+
+.mapframe {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+.link-footer:hover {
+  transform: translateY(-5px);
+  border: 2px solid #5760e6;
+  cursor: pointer;
 }

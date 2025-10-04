@@ -40,6 +40,16 @@
       <button class="contact-us">Contact Us</button>
     </div>
     <main id="main">
+      <div class="photo-change">
+        <img src="imgs/paris.jpg" class="changephoto Paris current" />
+        <img src="imgs/lyon.jpg" class="changephoto Lyon" />
+        <img src="imgs/marsej.jpg" class="changephoto Marseille" />
+        <img src="imgs/lile.jpg" class="changephoto Lille" />
+        <img src="imgs/tuluz.jpg" class="changephoto Toulouse" />
+        <img src="imgs/nice.jpg" class="changephoto Nice" />
+        <img src="imgs/nantes.jpg" class="changephoto Nantes" />
+        <img src="imgs/bordo.jpg" class="changephoto Bordeaux" />
+      </div>
       <nav>
         <div class="naslov">
           <img src="imgs/paris icon.svg" alt="" width="50px" />
@@ -83,71 +93,85 @@
         </div>
       </article>
     </main>
+
     <section id="locations">
-      <div class="loc-lside">
-        <h3>Locations</h3>
-        <p>Working days are from Monday to Friday</p>
+      <div class="loc-about">
+        <div class="loc-lside">
+          <h3>Locations</h3>
+          <p>Working days are from Monday to Friday</p>
+        </div>
+        <div class="items">
+          <div class="item">
+            <div class="item-left-side">
+              <div class="location">
+                <img src="imgs/location.svg" width="35px" />
+              </div>
+              <div class="info">
+                <p class="city-item">Paris</p>
+                <p class="street-item">Rue de Rivoli</p>
+              </div>
+            </div>
+            <div class="item-right-side">
+              <p class="date">07:00h - 16:00h</p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-left-side">
+              <div class="location">
+                <img src="imgs/location.svg" width="35px" />
+              </div>
+              <div class="info">
+                <p class="city-item">Paris</p>
+                <p class="street-item">Avenue des Champs-Élysées</p>
+              </div>
+            </div>
+            <div class="item-right-side">
+              <p class="date">07:00h - 15:00h</p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-left-side">
+              <div class="location">
+                <img src="imgs/location.svg" width="35px" />
+              </div>
+              <div class="info">
+                <p class="city-item">Lyon</p>
+                <p class="street-item">Rue de la Paix</p>
+              </div>
+            </div>
+            <div class="item-right-side">
+              <p class="date">07:00h - 18:00h</p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-left-side">
+              <div class="location">
+                <img src="imgs/location.svg" width="35px" />
+              </div>
+              <div class="info">
+                <p class="city-item">Marseille</p>
+                <p class="street-item">Rue du Faubourg Saint-Antoine</p>
+              </div>
+            </div>
+            <div class="item-right-side">
+              <p class="date">07:00h - 16:00h</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="items">
-        <div class="item">
-          <div class="item-left-side">
-            <div class="location">
-              <img src="imgs/location.svg" width="35px" />
-            </div>
-            <div class="info">
-              <p class="city-item">Paris</p>
-              <p class="street-item">Rue de Rivoli</p>
-            </div>
-          </div>
-          <div class="item-right-side">
-            <p class="date">07:00h - 16:00h</p>
-          </div>
-        </div>
-
-        <div class="item">
-          <div class="item-left-side">
-            <div class="location">
-              <img src="imgs/location.svg" width="35px" />
-            </div>
-            <div class="info">
-              <p class="city-item">Paris</p>
-              <p class="street-item">Avenue des Champs-Élysées</p>
-            </div>
-          </div>
-          <div class="item-right-side">
-            <p class="date">07:00h - 15:00h</p>
-          </div>
-        </div>
-
-        <div class="item">
-          <div class="item-left-side">
-            <div class="location">
-              <img src="imgs/location.svg" width="35px" />
-            </div>
-            <div class="info">
-              <p class="city-item">Lyon</p>
-              <p class="street-item">Rue de la Paix</p>
-            </div>
-          </div>
-          <div class="item-right-side">
-            <p class="date">07:00h - 18:00h</p>
-          </div>
-        </div>
-
-        <div class="item">
-          <div class="item-left-side">
-            <div class="location">
-              <img src="imgs/location.svg" width="35px" />
-            </div>
-            <div class="info">
-              <p class="city-item">Marseille</p>
-              <p class="street-item">Rue du Faubourg Saint-Antoine</p>
-            </div>
-          </div>
-          <div class="item-right-side">
-            <p class="date">07:00h - 16:00h</p>
-          </div>
-        </div>
+      <div class="mapframe">
+        <iframe
+          src=""
+          width="600"
+          height="450"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
       </div>
     </section>
     <section id="hotels">
@@ -350,15 +374,27 @@
       <div class="first-row-footer">
         <h1>Explore France in better way !</h1>
         <div class="links-footer">
-          <div class="link-footer">
+          <a
+            target="_blank"
+            href="https://www.facebook.com/tarik.celic.2025"
+            class="link-footer"
+          >
             <img src="imgs/facebook.svg" class="img-footer" />
-          </div>
-          <div class="link-footer">
+          </a>
+          <a
+            target="_blank"
+            href="https://www.linkedin.com/in/tarik-%C4%8Deli%C4%87-303b92363/"
+            class="link-footer"
+          >
             <img src="imgs/in.svg" class="img-footer" />
-          </div>
-          <div class="link-footer">
+          </a>
+          <a
+            target="_blank"
+            href="https://www.instagram.com/tarikcelicc/"
+            class="link-footer"
+          >
             <img src="imgs/insta.svg" class="img-footer" />
-          </div>
+          </a>
           <div class="link-footer">
             <img src="imgs/yt.svg" class="img-footer" />
           </div>
