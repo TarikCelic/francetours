@@ -767,3 +767,10 @@ p.copyright {
   border: 2px solid #5760e6;
   cursor: pointer;
 }
+.contact a {
+  padding: 0;
+  width: 100%;
+}
+.contact a:hover {
+  transform: scale(1);
+}

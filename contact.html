@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="styles/contact.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700&family=Montserrat:ital,wght@0,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav>
+      <a href="index.html">
+        <img src="imgs/home.svg" width="25px" />
+        Home
+      </a>
+      <div class="naslov">
+        <img
+          src="imgs/blackparis.svg"
+          alt="Paris icon"
+          width="50"
+          height="50"
+        />
+        <h1><span class="sevilla">France</span>tours</h1>
+      </div>
+    </nav>
+
+    <div class="form-container">
+      <div class="form-header">
+        <h2>Contact Us</h2>
+        <p>Have questions? We’re happy to help!</p>
+      </div>
+      <div class="success-message" id="successMessage">
+        Thank you! Your message has been successfully sent. We will respond as
+        soon as possible.
+      </div>
+
+      <form id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="ime">First Name *</label>
+            <input
+              type="text"
+              id="ime"
+              name="ime"
+              required
+              placeholder="Your first name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="prezime">Last Name *</label>
+            <input
+              type="text"
+              id="prezime"
+              name="prezime"
+              required
+              placeholder="Your last name"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="your.email@example.com"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="telefon">Phone</label>
+          <input
+            type="tel"
+            id="telefon"
+            name="telefon"
+            placeholder="+33 xx xxx xxx"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="tema">Subject *</label>
+          <select id="tema" name="tema" required>
+            <option value="">Select a subject...</option>
+            <option value="hoteli">Hotel Reservation</option>
+            <option value="avionske-karte">Flight Tickets</option>
+            <option value="turisticki-vodici">Tour Guides</option>
+            <option value="paketi">Complete Travel Packages</option>
+            <option value="iznajmljivanje">Vehicle Rental</option>
+            <option value="opste-informacije">General Information</option>
+            <option value="ostalo">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="poruka">Your Message *</label>
+          <textarea
+            id="poruka"
+            name="poruka"
+            required
+            placeholder="Please describe your inquiry or question in detail..."
+          ></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById("contactForm");
+      const successMessage = document.getElementById("successMessage");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Simulate form submission
+        successMessage.classList.add("show");
+        form.reset();
+
+        // Hide message after 5 seconds
+        setTimeout(() => {
+          successMessage.classList.remove("show");
+        }, 5000);
+
+        // Here you would add real form submission logic
+        // e.g., a fetch() call or integration with a service
+      });
+    </script>
+  </body>
+</html>
