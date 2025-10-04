@@ -9,7 +9,6 @@ const cities = {
   Bordeaux: "/francetours/imgs/bordo.jpg",
 };
 
-
 const h2 = document.querySelector("h2.sevillla");
 const links = document.querySelectorAll(".right-side a");
 const main = document.querySelector("main");

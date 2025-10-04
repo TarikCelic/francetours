@@ -13,6 +13,13 @@ body {
 }
 main {
   width: 100vw;
+  background: url(../imgs/lile.jpg);
+  background: url(../imgs/lyon.jpg);
+  background: url(../imgs/marsej.jpg);
+  background: url(../imgs/tuluz.jpg);
+  background: url(../imgs/nica.jpg);
+  background: url(../imgs/nantes.jpg);
+  background: url(../imgs/bordo.jpg);
   background: url(../imgs/paris.jpg);
   background-size: cover;
   background-repeat: no-repeat;
