@@ -108,6 +108,8 @@ locationItem.forEach((e) => {
 // Promjena gradova
 // Dinamičko učitavanje slika (optimizirano)
 const loadedImages = new Map(); // mapa umjesto seta, čuvamo DOM element
+// 🔹 Optimizovano dinamičko učitavanje slika (briše stare slike)
+let currentCity = null;
 
 links.forEach((link) => {
   link.addEventListener("click", (event) => {
@@ -116,36 +118,43 @@ links.forEach((link) => {
     const cityName = link.textContent.trim();
     const imagePath = link.getAttribute("data-img");
 
+    // Ako klikneš opet isti grad — ništa ne radi
+    if (currentCity === cityName) return;
+
+    currentCity = cityName;
+
     // Update selected link
     links.forEach((el) => el.classList.remove("selected"));
     link.classList.add("selected");
 
-    // Sakrij sve ostale slike osim trenutne
-    loadedImages.forEach((img, name) => {
-      if (name !== cityName) {
-        img.classList.remove("current");
-      }
-    });
-
-    // Ako slika već postoji, samo je prikaži
-    if (loadedImages.has(cityName)) {
-      loadedImages.get(cityName).classList.add("current");
-    } else if (imagePath) {
-      const img = document.createElement("img");
-      img.className = `changephoto current`;
-      img.alt = `${cityName} cityscape`;
-      img.loading = "lazy"; // lazy load!
-      img.style.width = "100%"; // skaliranje preko CSS-a
-      img.style.height = "1080";
-      img.style.objectFit = "cover";
-
-      img.src = imagePath;
-
-      photoChange.appendChild(img);
-      loadedImages.set(cityName, img);
+    // 🔸 Očisti prethodne slike
+    while (photoChange.firstChild) {
+      photoChange.removeChild(photoChange.firstChild);
     }
 
-    // Update tekst
+    // 🔸 Dodaj novu sliku
+    if (imagePath) {
+      const img = document.createElement("img");
+      img.className = "changephoto current";
+      img.alt = `${cityName} cityscape`;
+      img.loading = "lazy";
+      img.decoding = "async";
+      img.style.width = "100%";
+      img.style.height = "auto";
+      img.style.objectFit = "cover";
+      img.style.transition = "opacity 0.6s ease";
+      img.style.opacity = "0";
+
+      // Dodaj kad se učita
+      img.onload = () => {
+        img.style.opacity = "1";
+      };
+
+      img.src = imagePath;
+      photoChange.appendChild(img);
+    }
+
+    // 🔸 Update tekstualni opis
     const grad = sities.find((city) => city.name === cityName);
     if (grad) {
       h2.textContent = grad.name;
