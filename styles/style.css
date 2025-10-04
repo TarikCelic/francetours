@@ -590,9 +590,6 @@ a.selected:hover {
   .book-a-place {
     width: 90%;
   }
-  #locations {
-    text-align: center;
-  }
 }
 .img-de-place {
   display: flex;

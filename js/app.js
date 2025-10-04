@@ -79,7 +79,6 @@ const photoChange = document.querySelector(".photo-change");
 const buyTicketsBtn = document.querySelector(".buy-tickets");
 
 // Dinamičko učitavanje slika
-const loadedImages = new Set(["Paris"]);
 let currentMap = null;
 
 // Buy Tickets button
@@ -107,6 +106,9 @@ locationItem.forEach((e) => {
 });
 
 // Promjena gradova
+// Dinamičko učitavanje slika (optimizirano)
+const loadedImages = new Map(); // mapa umjesto seta, čuvamo DOM element
+
 links.forEach((link) => {
   link.addEventListener("click", (event) => {
     event.preventDefault();
@@ -118,33 +120,29 @@ links.forEach((link) => {
     links.forEach((el) => el.classList.remove("selected"));
     link.classList.add("selected");
 
-    // Prvo sakrij sve slike
-    const allImages = photoChange.querySelectorAll(".changephoto");
-    allImages.forEach((img) => img.classList.remove("current"));
+    // Sakrij sve ostale slike osim trenutne
+    loadedImages.forEach((img, name) => {
+      if (name !== cityName) {
+        img.classList.remove("current");
+      }
+    });
 
-    // Provjeri da li slika već postoji
-    const existingImage = photoChange.querySelector(`.${cityName}`);
-
-    if (existingImage) {
-      // Slika već postoji, samo je prikaži
-      existingImage.classList.add("current");
+    // Ako slika već postoji, samo je prikaži
+    if (loadedImages.has(cityName)) {
+      loadedImages.get(cityName).classList.add("current");
     } else if (imagePath) {
-      // Kreiraj novu sliku
       const img = document.createElement("img");
-      img.className = `changephoto ${cityName}`;
+      img.className = `changephoto current`;
       img.alt = `${cityName} cityscape`;
-      img.width = 1920;
-      img.height = 1080;
-
-      photoChange.appendChild(img);
-
-      // Učitaj sliku
-      img.onload = () => {
-        img.classList.add("current");
-      };
+      img.loading = "lazy"; // lazy load!
+      img.style.width = "100%"; // skaliranje preko CSS-a
+      img.style.height = "1080";
+      img.style.objectFit = "cover";
 
       img.src = imagePath;
-      loadedImages.add(cityName);
+
+      photoChange.appendChild(img);
+      loadedImages.set(cityName, img);
     }
 
     // Update tekst
